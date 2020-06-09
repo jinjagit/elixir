@@ -9,11 +9,11 @@ a_tuple = {22, "original", 47.6, true}
 
 # this does not change the original tuple
 result = Elements.replace(a_tuple, 1, "new")
-IO.inspect(result)
-IO.inspect(a_tuple)
+IO.inspect(result) #=> {22, "new", 47.6, true}
+IO.inspect(a_tuple) #=> {22, "original", 47.6, true}
 
 # this creates a new version of 'a_tuple' (the old one becomes garbage for collection)
 a_tuple = Elements.replace(a_tuple, 1, "new")
-IO.inspect(a_tuple)
+IO.inspect(a_tuple) #=> {22, "new", 47.6, true}
 
 # Note need to use inspect, not puts, to show contents of tuple
