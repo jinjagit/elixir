@@ -21,3 +21,19 @@ binary = <<515::16>>
 # <<515::16>> (also) specifies 16 bits of consecutive memory space,
 # thus the first byte represents 2*256 bits, the second byte the remaining 3 bits
 IO.inspect(binary) #=> <<2, 3>>
+
+binary = <<19::4>>
+IO.inspect(binary) #=> <<3::size(4)>>
+
+binary = <<112, 259>>
+IO.inspect(binary) #=> <<112, 3>>
+
+binary = <<1::4, 15::4>>
+# <<1::4, 15::4>> results in a value expressed in a 8 bit form, where 0001 (1) is
+# concatenated with 1111 (15), giving 31 in 8 bit form
+IO.inspect(binary) #=> <<31>>
+
+binary = <<1::1, 0::1, 1::1>>
+# If the total size of all the values isn’t a multiplier of 8,
+# the binary is called a bitstring—a sequence of bits:
+IO.inspect(binary) #=> <<5::size(3)>>
