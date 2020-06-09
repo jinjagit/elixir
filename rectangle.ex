@@ -5,4 +5,4 @@ end
 
 area = Geometry.rectangle(6)
 
-IO.puts(area)
+IO.puts(area) #=> 0

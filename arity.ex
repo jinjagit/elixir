@@ -7,11 +7,11 @@ end
 
 area = Geometry.rectangle(6)
 
-IO.puts(area)
+IO.puts(area) #=> 0
 
 area = Geometry.rectangle(6, 7)
 
-IO.puts(area)
+IO.puts(area) #=> 42
 
 # specifying default arg value = generates 2nd function (with same name)
 # and can generate more if more default args given
@@ -22,8 +22,8 @@ end
 
 area = Geometry2.rectangle(6)
 
-IO.puts(area)
+IO.puts(area) #=> 0
 
 area = Geometry2.rectangle(6, 7)
 
-IO.puts(area)
+IO.puts(area) #=> 42

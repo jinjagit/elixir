@@ -14,10 +14,9 @@ import IO
 
 result = TestPrivate.double(7)
 
-puts(result)
+puts(result) #=> 14
 
-# calling sum throws error: "TestPrivate.sum/2 is undefined or private"
-
-# result = TestPrivate.sum(1, 2)
+# calling sum throws error:
+result = TestPrivate.sum(1, 2) #=> TestPrivate.sum/2 is undefined or private
 
 # puts(result)

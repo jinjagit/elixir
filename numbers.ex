@@ -5,8 +5,8 @@ end
 
 # integer result of division will become a float
 result = Numbers.divide(6, 2)
-IO.puts(result)
+IO.puts(result) #=> 3.0
 
 # using auto-imported Kernel "div" funcion will return an integre result as an integer
 result = Numbers.divide2(6, 2)
-IO.puts(result)
+IO.puts(result) #=> 3

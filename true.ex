@@ -2,10 +2,8 @@ defmodule True do
   def same(a, b), do: a == b
 end
 
-# true
 result = True.same(9, 9)
-IO.puts(result)
+IO.puts(result) #=> true
 
-# false
 result = True.same(9, "nine")
-IO.puts(result)
+IO.puts(result) #=> false
