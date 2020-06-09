@@ -1,3 +1,3 @@
 # elixir
 
-my experimental noodlings
+my experimental noodlings, while working through "Elixir in Action", Saša Jurić

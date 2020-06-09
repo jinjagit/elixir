@@ -30,10 +30,10 @@ IO.inspect(binary) #=> <<112, 3>>
 
 binary = <<1::4, 15::4>>
 # <<1::4, 15::4>> results in a value expressed in a 8 bit form, where 0001 (1) is
-# concatenated with 1111 (15), giving 31 in 8 bit form
+# concatenated with 1111 (15), giving 0001111 (31) in 8 bit form
 IO.inspect(binary) #=> <<31>>
 
 binary = <<1::1, 0::1, 1::1>>
 # If the total size of all the values isn’t a multiplier of 8,
-# the binary is called a bitstring—a sequence of bits:
+# the binary is called a bitstring — a sequence of bits:
 IO.inspect(binary) #=> <<5::size(3)>>
