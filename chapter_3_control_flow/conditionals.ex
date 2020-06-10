@@ -18,7 +18,7 @@ IO.puts(Polymorphic.double("bibble")) #=> bibblebibble
 
 defmodule Fact do
   def fact(0), do: 1
-  def fact(n), do: n *fact(n - 1)
+  def fact(n), do: n * fact(n - 1)
 end
 
 IO.puts(Fact.fact(9)) = #=> 362880
