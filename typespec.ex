@@ -10,4 +10,5 @@ defmodule Circle2 do
   def circumference(r), do: 2*r*@pi
 end
 
-# Code.Typespec.fetch_specs(Map) will show the specs in the iex console (in a rather raw format)
+# Code.Typespec.fetch_specs(Map) will show the specs in the iex console
+# (in a rather raw format)

@@ -37,3 +37,7 @@ binary = <<1::1, 0::1, 1::1>>
 # If the total size of all the values isn’t a multiplier of 8,
 # the binary is called a bitstring — a sequence of bits:
 IO.inspect(binary) #=> <<5::size(3)>>
+
+# binaries and bitstrings can be concatenated using <>
+binary = <<1, 2>> <> <<3, 4>>
+IO.inspect(binary) #=> <<5::size(3)>>
