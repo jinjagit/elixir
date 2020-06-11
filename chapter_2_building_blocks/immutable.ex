@@ -1,7 +1,7 @@
 defmodule Elements do
  def get_elem(tuple, index), do: elem(tuple, index)
  def replace(tuple, index, new_item) do
-   put_elem(tuple, index,new_item)
+   put_elem(tuple, index, new_item)
  end
 end
 
