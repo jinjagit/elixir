@@ -72,7 +72,7 @@ defmodule Max do
   def max(a, b) do
     cond do
       a >= b -> a
-      true -> b # default clause, always lasy & set to true so condition is always met if previously not met
+      true -> b # default clause, always last & set to true so condition is always met if previously not met
     end
   end
 end
