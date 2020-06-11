@@ -114,6 +114,7 @@ defmodule TestNum do
 end
 
 IO.puts(TestNum.test(-0.5)) #=> negative
+IO.puts(TestNum.test(7)) #=> positive
 # IO.puts(TestNum.test(:not_a_number)) #=> ** (FunctionClauseError) no function clause matching in TestNum.test/1
 
 # multiclause lambdas
@@ -127,3 +128,4 @@ test_num = fn
 end
 
 IO.puts(test_num.(2)) #=> positive
+IO.puts(test_num.(-2.5)) #=> negative
