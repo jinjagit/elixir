@@ -81,9 +81,9 @@ IO.inspect(
   Enum.reduce(
     [1, "not_a_number", 2, :x, 7],
     0,
-    fn                                                        # multiclause lambda
+    fn                                                      # multiclause lambda
       element, sum when is_number(element) -> sum + element # matches numerical elements
-      _, sum -> sum                                           # matches anything else
+      _, sum -> sum                                         # matches anything else
     end
   )
 ) #=> 10
