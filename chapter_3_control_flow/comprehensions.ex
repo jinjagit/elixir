@@ -57,5 +57,12 @@ multiplication_table =
     {{x, y}, x * y}
   end
 
+IO.inspect(multiplication_table) #=> %{
+#=>                                     {3, 3} => 9,
+#=>                                     {6, 9} => 54,
+#=>                                     {7, 8} => 56,
+#=>                                     ... multiple key value pairs omitted ...
+#=>                                   }
+
 IO.inspect(multiplication_table[{5, 7}]) #=> 35
 IO.inspect(multiplication_table[{7, 5}]) #=> nil
