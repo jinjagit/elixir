@@ -15,7 +15,9 @@ Enum.each(list, print_square) #=> 4
                               #=> 16
 
 # lambda can be used directly (without temporary variable):
-Enum.each(list, fn(x) -> IO.puts(x *x) end)
+Enum.each(list, fn(x) -> IO.puts(x *x) end) #=> 4
+                                            #=> 9
+                                            #=> 16
 
 # capture operator simplifies this syntax:
 cube = &(IO.puts(&1 * &1 * &1))
