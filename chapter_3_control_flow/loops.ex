@@ -40,15 +40,15 @@ NatNums2.print("A") #=> n must be a positive integer
 
 
 # memory considerations: simple recursion can be problematic as a looping
-# construct: consider the follwing example:
+# construct: consider the following example:
 
-defmodule TestList do
-  def empty?([]), do: true
-  def empty?([_|_]), do: false
+defmodule ListHelper do
+  def sum([]), do: 0
+  def sum([head | tail]), do: head + sum(tail)
 end
 
-IO.puts(TestList.empty?([1])) #=> false
-IO.puts(TestList.empty?([])) #=> true
+IO.puts(ListHelper.sum([])) #=> 0
+IO.puts(ListHelper.sum([1, 2, 3])) #=> 6
 
 # The recursive loop above could completely consume available memory,
 # given a long enough list to sum! Solution:
