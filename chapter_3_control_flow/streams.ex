@@ -82,10 +82,9 @@ employees
 # less memory demanding than using multiple Enum functions to do the same.
 
 
-# In contrast, using streams makes it possible to read and immediately parse one
-# line at a time. For example, the following function takes a filename and
-# returns the list of all lines from that file that are longer than
-# 80 characters:
+# Using streams makes it possible to read and immediately parse one line at
+# a time. For example, the following function takes a filename and returns
+# the list of all lines from that file that are longer than 80 characters:
 
 defmodule LineLen do
   def large_lines!(path) do
