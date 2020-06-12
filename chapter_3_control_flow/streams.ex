@@ -108,3 +108,15 @@ IO.inspect(LineLen.large_lines!("streams.ex"))
 # Finally, you eagerly take only long lines, using Enum.filter/2. It’s at this
 # point that iteration happens. The consequence is that you never read the
 # entire file in memory; instead, you work on each line individually.
+
+# rewrite of above module, using full lambda syntax (for practice):
+
+defmodule LineLen2 do
+  def large_lines!(path) do
+    File.stream!(path)
+    |> Stream.map(fn(x) -> String.replace(x, "\n", "") end)
+    |> Enum.filter(fn(x) -> String.length(x) > 80 end)
+  end
+end
+
+IO.inspect(LineLen2.large_lines!("streams.ex"))
