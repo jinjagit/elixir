@@ -87,7 +87,7 @@ IO.inspect(
 # BUT, if we wish to add a further field to our todo entries, we will need to
 # rewrite the function signature(s), which will break the client. A solution is
 # use a single map to represent a structure with named fields. We can do this
-# by simply changing the .add_entry function:
+# by simply changing the .add_entry function;
 
 defmodule Todo2 do
   def new, do: MultiMap.new
@@ -100,6 +100,8 @@ defmodule Todo2 do
     MultiMap.get(todo_list, date)
   end
 end
+
+# ... and using a more verbose structure for entries:
 
 todo_list =
   Todo2.new
