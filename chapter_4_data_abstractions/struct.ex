@@ -56,7 +56,6 @@ IO.inspect(
 ) #=> [__struct__: Fraction, a: 1, b: 2]
 
 
-
 # The struct field has an important consequence on pattern matching.
 # A struct pattern can’t match a plain map:
 #
