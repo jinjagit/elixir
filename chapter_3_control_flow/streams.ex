@@ -95,9 +95,13 @@ defmodule LineLen do
 end
 
 IO.inspect(LineLen.large_lines!("streams.ex"))
-#=> ["IO.inspect(Enum.with_index(employees)) #=> [{\"Alice\", 0}, {\"Bob\", 1}, {\"John\", 2}]",
-#=>  "IO.inspect(stream) #=> #Stream<[enum: [1, 2, 3], funs: [#Function<48.35876588/1 in Stream.map/2>]]>",
-#=>  "|> Stream.map(&{&1, :math.sqrt(&1)}) #=> create {input_number, square_root} tuples"]
+#=> ["IO.inspect(Enum.with_index(employees)) #=> [{\"Alice\", 0}, {\"Bob\", 1},
+#     {\"John\", 2}]",
+#=> "IO.inspect(stream) #=> #Stream<[enum: [1, 2, 3], funs:
+#     [#Function<48.35876588/1 in Stream.map/2>]]>",
+#=> "|> Stream.map(&{&1, :math.sqrt(&1)}) #=> create {input_number,
+#     square_root} tuples"]
+#=> "# THIS IS THE EXAMPLE LONGEST LINE - xxxxxxxxxxxxxxxx ..."
 
 # Here you rely on the File.stream!/1 function, which takes a path of the file
 # and returns a stream of its lines. Because the result is a stream,
@@ -120,3 +124,74 @@ defmodule LineLen2 do
 end
 
 IO.inspect(LineLen2.large_lines!("streams.ex"))
+#=> ["IO.inspect(Enum.with_index(employees)) #=> [{\"Alice\", 0}, {\"Bob\", 1},
+#     {\"John\", 2}]",
+#=> "IO.inspect(stream) #=> #Stream<[enum: [1, 2, 3], funs:
+#     [#Function<48.35876588/1 in Stream.map/2>]]>",
+#=> "|> Stream.map(&{&1, :math.sqrt(&1)}) #=> create {input_number,
+#     square_root} tuples"]
+#=> "# THIS IS THE EXAMPLE LONGEST LINE - xxxxxxxxxxxxxxxx ..."
+
+
+# Practice exercises:
+
+# Using large_lines!/1 as a model, write the following function(s):
+
+# 1. lines_lengths!/1 that takes a file path and returns a list of numbers,
+# with each number representing the length of the corresponding line from the
+# file.
+# 2. longest_line_length!/1 that returns the length of the longest line in a
+# file.
+# 3. longest_line!/1 that returns the contents of the longest line in a file.
+# 4. words_per_line!/1 that returns a list of numbers, with each number
+# representing the word count in a file. Hint: to get the word count of a line,
+# use length(String.split(line)).
+
+# THIS IS THE EXAMPLE LONGEST LINE - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+defmodule FileStuff do
+  defp lines_stream!(path) do
+    File.stream!(path)
+    |> Stream.map(&String.replace(&1, "\n", ""))
+  end
+
+
+  def lines_lengths!(path) do
+    lines_stream!(path)
+    |> Enum.map(&String.length(&1))
+  end
+
+  def longest_line_length!(path) do
+    lines_stream!(path)
+    |> Stream.map(&String.length(&1))
+    |> Enum.max()
+  end
+
+  def longest_line!(path) do
+    lines_stream!(path)
+    |> Enum.max_by(&String.length(&1)) # I cheated here. Did not know the .max_by command
+  end
+
+  def words_per_line!(path) do
+    lines_stream!(path)
+    |> Enum.map(&length(String.split(&1)))
+  end
+
+  def total_words!(path) do
+    lines_stream!(path)
+    |> Stream.map(&length(String.split(&1)))
+    |> Enum.sum()
+  end
+
+  def print_total(path) do
+    IO.puts "Total words: #{total_words!(path)}"
+  end
+end
+
+IO.inspect(FileStuff.lines_lengths!("streams.ex")) #=> [72, 54, 0, 35, 0, ...]
+IO.inspect(FileStuff.longest_line_length!("streams.ex")) #=> 108
+IO.inspect(FileStuff.longest_line!("streams.ex"))
+#=> "#THIS IS THE EXAMPLE LONGEST LINE - xxxxxxxxxxxxxxxx ..."
+IO.inspect(FileStuff.words_per_line!("streams.ex")) #=> [14, 7, 0, 6, 0, ...]
+IO.inspect(FileStuff.total_words!("streams.ex")) #=> 954
+FileStuff.print_total("streams.ex") #=> Total words: 954
