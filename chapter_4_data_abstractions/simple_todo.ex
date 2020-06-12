@@ -25,5 +25,9 @@ todo_list =
   |> TodoList.add_entry({2020, 6, 20}, "Movies")
 
 IO.inspect(
+  todo_list
+) #=> %{{2020, 6, 20} => ["Movies", "Dentist"], {2020, 6, 21} => ["Shopping"]}
+
+IO.inspect(
   TodoList.entries(todo_list, {2020, 6, 20})
 ) #=> ["Movies", "Dentist"]
