@@ -12,6 +12,7 @@ person = {:person, "Ana", 27}
 IO.inspect(person) #=> {:person, "Ana", 27}
 {:person, name, age} = person # this binds values to variables
 IO.puts(name) #=> Ana
+IO.puts(age) #=> 27
 
 expected_value = 42
 # Note that the pin operator, '^', does not bind a value
@@ -57,6 +58,7 @@ IO.inspect(remainder) #=> <<2, 3>>
 # expecting 4-bit value(s)
 <<a :: 4, b :: 4>> = <<155>>
 IO.puts(a) #=> 9 (since 1001 is first 4 bits of 155 as 8-bit number)
+IO.puts(b) #=> 11 (since 1011 is second 4 bits of 155 as 8-bit number)
 
 # binary string matching
 
