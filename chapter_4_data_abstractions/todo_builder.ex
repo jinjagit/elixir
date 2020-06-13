@@ -10,7 +10,7 @@ defmodule TodoList.CsvImporter do
     |> Stream.map(&String.replace(&1, ",", ""))
     |> Stream.map(&String.split(&1))
     |> Stream.map(
-    fn([head | [hd | _tail]]) ->
+    fn([head | [hd | _tl]]) ->
       date = date_to_integers(head)
       %{date: date, title: hd}
     end
