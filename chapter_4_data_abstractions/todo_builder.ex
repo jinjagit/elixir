@@ -11,14 +11,14 @@ defmodule TodoList.CsvImporter do
     |> Stream.map(&String.split(&1))
     |> Stream.map(
     fn([head | [hd | _tail]]) ->
-      date = format_date(head)
+      date = date_to_integers(head)
       %{date: date, title: hd}
     end
     )
     |> Enum.to_list()
   end
 
-  def format_date(string) do
+  def date_to_integers(string) do
     String.split(string, "/")
     |> Stream.map(&String.to_integer(&1))
     |> Enum.to_list
