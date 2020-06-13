@@ -19,7 +19,7 @@ defmodule TodoList.CsvImporter do
   end
 
   def format_date(string) do
-    stream = String.split(string, "/")
+    String.split(string, "/")
     |> Stream.map(&String.to_integer(&1))
     |> Enum.to_list
     |> List.to_tuple()
@@ -29,3 +29,8 @@ end
 IO.inspect(
   TodoList.CsvImporter.parse!("todos.csv")
 )
+#=> [
+#=>  %{date: {2020, 6, 20}, title: "Dentist"},
+#=>  %{date: {2020, 6, 19}, title: "Shopping"},
+#=>  %{date: {2020, 6, 20}, title: "Movies"}
+#=> ]
