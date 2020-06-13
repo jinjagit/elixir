@@ -55,6 +55,9 @@ IO.inspect(
   Map.to_list(one_half)
 ) #=> [__struct__: Fraction, a: 1, b: 2]
 
+# Note, the following returns a map, not a list
+IO.inspect(one_half, structs: false) #=> %{__struct__: Fraction, a: 1, b: 2}
+
 
 # The struct field has an important consequence on pattern matching.
 # A struct pattern can’t match a plain map:
