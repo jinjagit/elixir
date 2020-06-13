@@ -39,6 +39,21 @@ defmodule TodoList do
       end)
   end
 
+  def update_entry(
+    %TodoList{entries: entries} = todo_list,
+    entry_id,
+    updater_fn
+  ) do
+    case entries[entry_id] do
+      nil -> todo_list
+
+    old_entry ->
+      new_entry = updater_fn.(old_entry)
+      new_entries = Map.put(entries, new_entry.id, new_entry)
+      %TodoList{todo_list | entries: new_entries}
+    end
+  end
+
 end
 
 todo_list =
@@ -76,3 +91,29 @@ IO.inspect(
 # Note that this refactoring (of add_entry/2 & entries/2) has also added
 # runtime type checks that use pattern matching to explicity check that the
 # first argument is an instance of the TodoList struct.
+
+# updating an entry - update.entry/3:
+
+# 2 options: accept an entry map and replace an entry if the same ID exists OR
+# accept an ID value and an updater lamda, where the lambda receives the
+# original entry and returns the modified version.
+# This example uses the latter approach. It also does not raise an error if an
+# entry with a given ID doesn't exist.
+
+todo_list = TodoList.update_entry(
+  todo_list,
+  1,
+  &Map.put(&1, :date, {2020, 6, 30})
+)
+
+IO.inspect(todo_list)
+#=> %TodoList{
+#=>   auto_id: 4,
+#=>   entries: %{
+#=>     1 => %{date: {2020, 6, 30}, id: 1, title: "Dentist"},
+#=>     2 => %{date: {2020, 6, 21}, id: 2, title: "Shopping"},
+#=>     3 => %{date: {2020, 6, 20}, id: 3, title: "Movies"}
+#=>   }
+#=> }
+
+# Note, entry with id 1 now has new date.
