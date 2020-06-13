@@ -1,16 +1,16 @@
 # working with hierarchical data
 
 # Example here extends the simple_todo.ex example to brovide basic CRUD support.
-# (C & R already exist)
+# (C & R already exist, but will be developed)
 
 # Updating and deleting entries requires ability to uniquely identify entries.
 
 # generating IDs:
 
 # need to transform the to-do list into a struct, as the data structure now
-# needs to hold 2 piecesof info: the entries collection and the ID value for the
-# next entry. This will facilitate quick insertion, upsate and read of
-# individual entries
+# needs to hold 2 pieces of info: the entries collection and the ID value for
+# the next entry. This will facilitate quick insertion, update and read of
+# individual entries:
 
 defmodule TodoList do
   defstruct auto_id: 1, entries: Map.new
@@ -27,6 +27,16 @@ defmodule TodoList do
     entries: new_entries,
     auto_id: auto_id + 1
     } # updates the struct
+  end
+
+  def entries(%TodoList{entries: entries}, date) do
+    entries
+    |> Stream.filter(fn({_, entry}) ->
+        entry.date == date
+      end)
+    |> Enum.map(fn({_, entry}) ->
+        entry
+      end)
   end
 
 end
@@ -51,3 +61,18 @@ IO.inspect(
 #=>     3 => %{date: {2020, 6, 20}, id: 3, title: "Movies"}
 #=>   }
 #=> }
+
+# filtering entries by date - TodoList.entries/2 now requires iteration
+# through all the entries, rather than simply using Map.get to match a key.
+
+IO.inspect(
+  TodoList.entries(todo_list, {2020, 6, 20})
+)
+#=> [
+#=>   %{date: {2020, 6, 20}, id: 1, title: "Dentist"},
+#=>   %{date: {2020, 6, 20}, id: 3, title: "Movies"}
+#=> ]
+
+# Note that this refactoring (of add_entry/2 & entries/2) has also added
+# runtime type checks that use pattern matching to explicity check that the
+# first argument is an instance of the TodoList struct.
