@@ -1,7 +1,7 @@
 # Build a todo list by reading and parsing a CSV file, and iterating over the
 # filtered contents of the file.
 
-# This is an exercise, based on the contents of chapter 4, from 4.2.4 onwards.
+# This is a pactice exercise. See section 4.2.5 for details.
 
 # 1. Copy/ paste TodoList from hierarchical.ex (devloped earlier in chapter 4)
 # 2. Write TodoList.CsvImporter module to parse csv file to useable data format
