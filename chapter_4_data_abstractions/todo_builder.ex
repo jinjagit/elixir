@@ -249,8 +249,8 @@ IO.inspect(todo_list)
 # I included my CsvImporter module within the TodoList module, rather than at
 # same level as TodoList, as the naming convention suggested this was what was
 # intended. It seems either approach works. I guess, however, that total
-# seperation is best practice, to enable seperation by file & by BEAM file per
-# module.
+# seperation is best practice, to mirror seperation by file & by BEAM file per
+# module (though I note this happened on compilation in any case).
 
 # import/1 def included in this module, whereas I put a list_from_file/1 def
 # in my TodoList module. This seems an arbitrary choice.
