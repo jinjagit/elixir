@@ -15,7 +15,6 @@ Enum.each(map, &IO.inspect/1)
 # If the protocol isn’t implemented for the given data type, an error is raised:
 
 todo_list = TodoList.new_from_file("todos.csv") # uses module from compiled beam file
-IO.inspect(todo_list)
 
 # IO.puts(todo_list) #=> ** (Protocol.UndefinedError) protocol String.Chars not implemented for %TodoList{ ... }
 
