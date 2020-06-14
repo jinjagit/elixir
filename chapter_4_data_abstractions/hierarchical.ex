@@ -62,7 +62,6 @@ defmodule TodoList do
   def delete_entry(%TodoList{entries: entries} = todo_list, entry_id) do
     %TodoList{todo_list | entries: Map.delete(entries, entry_id)}
   end
-
 end
 
 todo_list =
