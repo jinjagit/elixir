@@ -66,11 +66,53 @@ defimpl Collectable, for: TodoList do
 
   # appender implementation (all 3 defp functions)
   defp into_callback(todo_list, {:cont, entry}) do
+    # IO.puts("DEBUG: I am defp into_callback/2")
     TodoList.add_entry(todo_list, entry)
   end
 
   defp into_callback(todo_list, :done), do: todo_list
-  defp into_callback(todo_list, :halt), do: :ok
+  defp into_callback(_todo_list, :halt), do: :ok
+end
+
+
+defimpl Enumerable, for: TodoList do
+  def count(todo_list \\ %{}) do
+    # IO.puts("DEBUG: I am count/1")
+    count_next(todo_list.entries, 0)
+  end
+
+  defp count_step(_entries, nil, count), do: {:ok, count}
+  defp count_step(entries, pair, count) do
+    {first_key, _val} = pair
+    entries = Map.delete(entries, first_key)
+    count = count + 1
+    # IO.puts(count)
+    count_next(entries, count)
+  end
+
+  defp count_next(entries, count) do
+    pair = Enum.at(entries, 0, nil)
+    count_step(entries, pair, count)
+  end
+
+
+  def member?(todo_list, element) do
+    if Map.has_key?(todo_list.entries, element) === true do
+      {:ok, true}
+    else
+      {:ok, false}
+    end
+  end
+
+
+  def slice(todo_list) do
+    size = count(todo_list)
+    {:ok, size, fn(x) -> Enum.at(todo_list.entries, x) end}
+  end
+
+  def reduce(todo_list, acc \\ 0, acc_fn) do
+    Enum.reduce(todo_list.entries, acc, acc_fn)
+  end
 end
 
 # The exported function into/1 is called by the generic code (comprehensions,
@@ -109,8 +151,23 @@ IO.inspect(todo_list)
 # Note that this does not mean that a call to Enum will now work, for example,
 # since an implementation of Enumerable for TodoList has not been implemented.
 
-# list = Enum.into(todo_list, []) #=> ** (Protocol.UndefinedError) protocol Enumerable not implemented for %TodoList{...}
+#list = Enum.into(todo_list, []) #=> ** (Protocol.UndefinedError) protocol Enumerable not implemented for %TodoList{...}
+
+# Enumerable protocol needs (minimum): count/1, member?/2, reduce/3, slice/1
 
 # I have tried implementing the Enumerable protocol for TodoList, but this
 # attempt has revealed I need to learn much more about how protocols are
 # implemented, and how to understand documentation, before I can do this.
+
+# These now work (and didn't before I implemented Enumerable protocol)
+Enum.each(todo_list, fn(x) -> IO.inspect(x) end)
+#=> {1, %{date: {2020, 6, 20}, id: 1, title: "Dentist"}}
+#=> {2, %{date: {2020, 6, 19}, id: 2, title: "Shopping"}}
+#=> {3, %{date: {2020, 6, 20}, id: 3, title: "Movies"}}
+
+IO.puts(Enum.count(todo_list)) #=> 3
+
+# These still don't work:
+# IO.inspect(Enum.slice(todo_list, 2, 1)) #=> ** (ArithmeticError) bad argument in arithmetic expression: {:ok, 3} - 2
+# IO.inspect(Enum.at(todo_list, 2)) #=> ** (ArithmeticError) bad argument in arithmetic expression: {:ok, 3} - 2
+list = Enum.into(todo_list, []) #=> ** (FunctionClauseError) no function clause matching in :lists.reverse/1
