@@ -66,7 +66,7 @@ defimpl Collectable, for: TodoList do
 
   # appender implementation (all 3 defp functions)
   defp into_callback(todo_list, {:cont, entry}) do
-    # IO.puts("DEBUG: I am defp into_callback/2")
+    IO.puts("DEBUG: I am defp into_callback/2")
     TodoList.add_entry(todo_list, entry)
   end
 
@@ -165,9 +165,12 @@ Enum.each(todo_list, fn(x) -> IO.inspect(x) end)
 #=> {2, %{date: {2020, 6, 19}, id: 2, title: "Shopping"}}
 #=> {3, %{date: {2020, 6, 20}, id: 3, title: "Movies"}}
 
-IO.puts(Enum.count(todo_list)) #=> 3
+#IO.puts(Enum.count(todo_list)) #=> 3
 
 # These still don't work:
 # IO.inspect(Enum.slice(todo_list, 2, 1)) #=> ** (ArithmeticError) bad argument in arithmetic expression: {:ok, 3} - 2
 # IO.inspect(Enum.at(todo_list, 2)) #=> ** (ArithmeticError) bad argument in arithmetic expression: {:ok, 3} - 2
-list = Enum.into(todo_list, []) #=> ** (FunctionClauseError) no function clause matching in :lists.reverse/1
+# list = Enum.into(todo_list, []) #=> ** (FunctionClauseError) no function clause matching in :lists.reverse/1
+
+# To see the pure data structure:
+IO.puts(inspect(todo_list, structs: false))
