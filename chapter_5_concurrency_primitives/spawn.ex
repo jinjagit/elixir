@@ -4,7 +4,7 @@ run_query = fn(query_def) ->
 end
 
 # this takes 10 seconds to run 5 queries sequentially:
-#1..5 |> Enum.map(&run_query.("query #{&1}"))
+1..5 |> Enum.map(&run_query.("query #{&1}"))
 
 #=> query 1 result
 #=> query 2 result
@@ -19,7 +19,7 @@ async_query = fn(query_def) ->
 end
 
 # this takes 2 seconds to run 5 queries concurently:
-#1..5 |> Enum.map(&async_query.("async query #{&1}"))
+1..5 |> Enum.map(&async_query.("async query #{&1}"))
 
 #=> async query 1 result
 #=> async query 2 result
@@ -76,7 +76,7 @@ end
 server_pid = DatabaseServer.start
 DatabaseServer.run_async(server_pid, "query 1")
 DatabaseServer.get_result
-#=> query 1 result
+#=> DatabaseServer: query 1 result
 DatabaseServer.run_async(server_pid, "query 2")
 DatabaseServer.get_result
-#=> query 2 result
+#=> DatabaseServer: query 2 result
