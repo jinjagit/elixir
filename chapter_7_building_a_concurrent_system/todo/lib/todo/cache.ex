@@ -2,6 +2,7 @@ defmodule Todo.Cache do
   use GenServer
 
   def init(_) do
+    Todo.Database.start("./persist/")
     {:ok, Map.new}
   end
 
@@ -19,7 +20,7 @@ defmodule Todo.Cache do
         {:reply, todo_server, todo_servers}
 
       :error -> # server doesn't exist
-        {:ok, new_server} = Todo.Server.start # starts the new server
+        {:ok, new_server} = Todo.Server.start(todo_list_name) # starts the new server
 
         {
           :reply,
