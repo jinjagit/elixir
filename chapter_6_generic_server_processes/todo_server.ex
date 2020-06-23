@@ -79,7 +79,11 @@ defmodule TodoList do
   end
 end
 
+
+
 {:ok, todo_server} = TodoServer.start
+
 TodoServer.add_entry(todo_server, %{date: {2021, 11, 11}, title: "Dentist"})
+
 IO.inspect(TodoServer.entries(todo_server, {2021,11,11}))
 #=> [%{date: {2021, 11, 11}, id: 1, title: "Dentist"}]
