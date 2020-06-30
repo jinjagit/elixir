@@ -1,5 +1,3 @@
-# Common top-level module alias does not require previous declaration
-
 defmodule Test.One do
   def response do
     IO.puts "One"
@@ -12,5 +10,11 @@ defmodule Test.Two do
   end
 end
 
+alias Test.One, as: Bibble
+
+
 Test.One.response #=> One
 Test.Two.response #=> Two
+
+Bibble.response #=> One
+Bobble.response #=> Two
